@@ -8,6 +8,8 @@ class NGPVANActivistCodesAPI(base.NGPVANAPI):
         return self.get_page_or_pages('activistCodes', page_number, params)
 
     def get_activistcode(self, activistCodeId):
-        newpath='activistCodes/'+activistCodeId
 
-        return self.get_page_or_pages(newpath)
+        response = self.client.get(
+            '%sactivistCodes/%s' % (self.base_url, activistCodeId)
+        )
+        return {'results': [response], 'Activist Code': response.json()}
